@@ -1,0 +1,18 @@
+{
+  "required": true,
+  "minVersion": "0.8.2",
+  "package": "wf.mixin",
+  "compatibilityLevel": "JAVA_11",
+  "mixins": [
+    "MixinMinecraftServer",
+    "MixinPlayerEntity",
+    "MixinPlayerManager",
+    "MixinServerPlayNetworkHandler"
+  ],
+  "client": [
+    "client.MixinGameRenderer"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "type": "sword",
+  "id": "test:test_sword_2",
+  "attack_distance": 100,
+  "attack_speed": -2,
+  "attack_damage": 10,
+  "critical_rate": 0.3,
+  "weight": -10
+}
