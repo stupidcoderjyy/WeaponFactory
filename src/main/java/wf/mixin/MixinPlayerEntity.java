@@ -48,11 +48,4 @@ public abstract class MixinPlayerEntity extends LivingEntity {
             player.removeStatusEffect(Mod.EFFECT_WEAPON_WEIGHT);
         }
     }
-
-    @Inject(method = "tick", at = @At("HEAD"))
-    private void hookRemoveEffectIcon(CallbackInfo ci) {
-        if (getWorld().isClient && isPlayer()) {
-            removeStatusEffectInternal(Mod.EFFECT_WEAPON_WEIGHT);
-        }
-    }
 }

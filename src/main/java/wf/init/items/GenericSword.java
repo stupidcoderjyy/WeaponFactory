@@ -9,8 +9,9 @@ public class GenericSword extends SwordItem implements IWeapon {
     private final float criticalRate;
     private final int weight;
 
-    public GenericSword(ToolMaterial toolMaterial, int attackDamage, float attackSpeed, float attackDistance, float criticalRate, int weight) {
-        super(toolMaterial, attackDamage, attackSpeed, new Settings());
+    public GenericSword(ToolMaterial toolMaterial, Settings settings, int attackDamage, float attackSpeed,
+                        float attackDistance, float criticalRate, int weight) {
+        super(toolMaterial, attackDamage, attackSpeed, settings);
         this.attackDistance = attackDistance;
         this.criticalRate = criticalRate;
         this.weight = weight;

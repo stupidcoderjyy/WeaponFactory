@@ -1,5 +1,6 @@
 package wf.init.builders;
 
+import net.minecraft.item.Item;
 import net.minecraft.item.ToolMaterial;
 import net.minecraft.recipe.Ingredient;
 import net.minecraft.util.math.MathHelper;
@@ -13,6 +14,7 @@ public class GenericSwordBuilder implements IWeaponBuilder<GenericSword> {
     private float attackDistance = 4.5f;
     private float criticalRate = 0.2f;
     private int weight = 1;
+    private int durability = 100;
 
     @Override
     public void setAttackDistance(float distance) {
@@ -40,8 +42,15 @@ public class GenericSwordBuilder implements IWeaponBuilder<GenericSword> {
     }
 
     @Override
+    public void setDurability(int durability) {
+        this.durability = Math.max(1, durability);
+    }
+
+    @Override
     public GenericSword build() {
-        return new GenericSword(EMPTY, attackDamage, attackSpeed, attackDistance, criticalRate, weight);
+        var settings = new Item.Settings();
+        settings.maxDamage(durability);
+        return new GenericSword(EMPTY, settings, attackDamage, attackSpeed, attackDistance, criticalRate, weight);
     }
 
     private static class EmptyMaterial implements ToolMaterial {

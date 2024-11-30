@@ -5,5 +5,6 @@
   "attack_speed": -2,
   "attack_damage": 10,
   "critical_rate": 0.3,
-  "weight": -10
+  "weight": -10,
+  "durability": 100
 }

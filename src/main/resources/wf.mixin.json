@@ -4,6 +4,7 @@
   "package": "wf.mixin",
   "compatibilityLevel": "JAVA_11",
   "mixins": [
+    "MixinLivingEntity",
     "MixinMinecraftServer",
     "MixinPlayerEntity",
     "MixinPlayerManager",

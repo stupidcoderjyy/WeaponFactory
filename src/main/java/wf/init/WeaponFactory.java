@@ -20,7 +20,7 @@ import java.util.function.Supplier;
 import java.util.stream.Stream;
 
 public class WeaponFactory {
-    private final Map<String, IParser> parsers = new HashMap<>();
+    private final Map<String, EnumParser> parsers = new HashMap<>();
     private final Map<String, Supplier<IWeaponBuilder<?>>> itemBuilders = new HashMap<>();
     private final Map<Identifier, Item> items = new HashMap<>();
 
@@ -87,7 +87,7 @@ public class WeaponFactory {
     }
 
     private void initBuilders() {
-        Arrays.stream(EnumParser.values()).forEach(p -> parsers.put(p.key, p.parser));
+        Arrays.stream(EnumParser.values()).forEach(p -> parsers.put(p.key, p));
         Arrays.stream(EnumWeaponBuilder.values()).forEach(p -> itemBuilders.put(p.key, p.builder));
     }
 

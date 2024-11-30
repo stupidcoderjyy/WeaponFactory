@@ -8,5 +8,6 @@ public interface IWeaponBuilder<I extends Item> {
     void setAttackDamage(int damage);
     void setCriticalRate(float rate);
     void setWeight(int weight);
+    void setDurability(int durability);
     I build();
 }
