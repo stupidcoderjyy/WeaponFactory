@@ -23,6 +23,7 @@ public class WeaponFactory {
     private final Map<String, EnumParser> parsers = new HashMap<>();
     private final Map<String, Supplier<IWeaponBuilder<?>>> itemBuilders = new HashMap<>();
     private final Map<Identifier, Item> items = new HashMap<>();
+    private final Map<Identifier, IAbility> abilities = new HashMap<>();
 
     static void init(Path path) {
         var wf = new WeaponFactory();
@@ -83,6 +84,24 @@ public class WeaponFactory {
                 .get();
         json.asMap().forEach((k, child) ->
                 Optional.ofNullable(parsers.get(k)).ifPresent(p -> p.parse(builder, child)));
+        Optional.ofNullable(json.get("abilities")).ifPresent(e1 -> {
+            if (!e1.isJsonArray()) {
+                throw new JsonParseException("entry 'abilities' should be an array");
+            }
+            e1.getAsJsonArray().forEach(e2 -> {
+                Identifier aId;
+                try {
+                    aId = new Identifier(e2.getAsString());
+                    var ability = abilities.get(aId);
+                    if (ability == null) {
+                        throw new Exception();
+                    }
+                    builder.addAbility(aId, ability);
+                } catch (Exception err) {
+                    Mod.getLogger().error("invalid identifier or unregistered ability: {}", e2.getAsString());
+                }
+            });
+        });
         return builder.build();
     }
 

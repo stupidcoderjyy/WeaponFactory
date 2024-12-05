@@ -3,9 +3,14 @@ package wf.init.builders;
 import net.minecraft.item.Item;
 import net.minecraft.item.ToolMaterial;
 import net.minecraft.recipe.Ingredient;
+import net.minecraft.util.Identifier;
 import net.minecraft.util.math.MathHelper;
+import wf.init.IAbility;
 import wf.init.IWeaponBuilder;
 import wf.init.items.GenericSword;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class GenericSwordBuilder implements IWeaponBuilder<GenericSword> {
     private static final ToolMaterial EMPTY = new EmptyMaterial();
@@ -15,6 +20,7 @@ public class GenericSwordBuilder implements IWeaponBuilder<GenericSword> {
     private float criticalRate = 0.2f;
     private int weight = 1;
     private int durability = 100;
+    private final Map<Identifier, IAbility> abilities = new HashMap<>();
 
     @Override
     public void setAttackDistance(float distance) {
@@ -47,10 +53,15 @@ public class GenericSwordBuilder implements IWeaponBuilder<GenericSword> {
     }
 
     @Override
+    public void addAbility(Identifier id, IAbility ability) {
+        abilities.put(id, ability);
+    }
+
+    @Override
     public GenericSword build() {
         var settings = new Item.Settings();
         settings.maxDamage(durability);
-        return new GenericSword(EMPTY, settings, attackDamage, attackSpeed, attackDistance, criticalRate, weight);
+        return new GenericSword(EMPTY, settings, abilities.values(), attackDamage, attackSpeed, attackDistance, criticalRate, weight);
     }
 
     private static class EmptyMaterial implements ToolMaterial {
